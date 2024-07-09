@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/letsencrypt
 .env
 .env.backup
 .env.production
