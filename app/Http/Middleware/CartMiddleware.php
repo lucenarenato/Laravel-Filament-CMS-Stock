@@ -2,28 +2,39 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\CartManager;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Services\CartManager;
+use Exception;
 
 class CartMiddleware
 {
     /**
      * Handle an incoming request.
      *
+     * @param \Illuminate\Http\Request $request
      * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $cart = app(CartManager::class);
+        try {
+            $cart = app(CartManager::class);
 
-        if (!$cart->exists()) {
-            $cart->create($request->user());
-        }
+            if (!$cart->exists()) {
+                $cart->create($request->user());
+            }
 
-        if ($request->user()) {
-            $cart->associateWithUser();
+            if ($request->user()) {
+                $cart->associateWithUser();
+            }
+        } catch (Exception $e) {
+            // Manejo de excepciones (puedes registrar el error o tomar alguna acción)
+            // Log::error('Error en el manejo del carrito: ' . $e->getMessage());
+
+            // Opcional: Redirigir a una página de error o devolver una respuesta de error
+            return response()->json(['error' => 'Error en el manejo del carrito'], 500);
         }
 
         return $next($request);

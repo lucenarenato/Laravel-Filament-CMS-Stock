@@ -21,7 +21,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', HomeController::class)->name('home');
-Route::get('/cart', CartController::class)->name('cart');
+
+Route::middleware(['auth', 'cart'])->group(function () {
+    Route::get('/cart', CartController::class)->name('cart');
+});
+
+
 Route::get('/checkout', CheckoutController::class)->name('checkout');
 Route::get('/orders', OrdersShowController::class)->name('orders.show');
 Route::get('/orders/{order:order_id}', OrderShowController::class)->name('order.show');

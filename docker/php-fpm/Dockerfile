@@ -26,7 +26,8 @@ RUN apt-get update && \
         libreadline-dev \
         libgmp-dev \
         mariadb-client \
-        unzip
+        unzip \
+        libwebp-dev
 
 # Install soap extention
 RUN docker-php-ext-install soap
@@ -73,7 +74,7 @@ RUN pecl install imagick && \
 
 # Install the PHP gd library
 RUN docker-php-ext-install gd && \
-    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && \
     docker-php-ext-install gd
 
 #####################################

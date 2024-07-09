@@ -33,6 +33,10 @@ class Product extends Model implements HasMedia
         'content' => 'array'
     ];
 
+    protected $attributes = [
+        'meta_description' => 'Descripción por defecto',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
