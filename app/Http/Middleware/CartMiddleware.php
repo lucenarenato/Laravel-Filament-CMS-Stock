@@ -34,7 +34,7 @@ class CartMiddleware
             // Log::error('Error en el manejo del carrito: ' . $e->getMessage());
 
             // Opcional: Redirigir a una página de error o devolver una respuesta de error
-            return response()->json(['error' => 'Error en el manejo del carrito'], 500);
+            return response()->json(['error' => 'Erro no gerenciamento do carrinho'], 500);
         }
 
         return $next($request);

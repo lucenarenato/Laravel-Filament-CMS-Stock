@@ -20,7 +20,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', HomeController::class)->name('home');
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/lists', HomeController::class)->name('home');
 
 Route::middleware(['auth', 'cart'])->group(function () {
     Route::get('/cart', CartController::class)->name('cart');
