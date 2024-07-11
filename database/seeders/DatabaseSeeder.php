@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(10)->create();
         // password
         \App\Models\User::factory()->create([
             'name' => 'Test User',
@@ -22,5 +21,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Renato Lucena',
             'email' => 'cpdrenato@gmail.com',
         ]);
+        \App\Models\User::factory(10)->create();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use URL;
 use App\Filament\Blocks\FaqsBlock;
 use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Support\ServiceProvider;
@@ -27,9 +28,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
-                ->locales(['ar','en','fr']); // also accepts a closure
+                /*->flags([
+                    'en' => asset('flags/usa.svg'),
+                    'pt_BR' => asset('flags/brazil.svg')
+                ])*/
+                ->locales(['pt_BR', 'pt','en','fr'])
+                ->labels([
+                    'pt_BR' => 'Português (BR)',
+                    'pt' => 'Português (PT)',
+                    // Other custom labels as needed
+                ]);
         });
     }
 }

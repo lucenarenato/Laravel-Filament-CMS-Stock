@@ -11,6 +11,7 @@ use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,8 @@ class User extends Authenticatable
     use Billable;
     use TwoFactorAuthenticatable;
 
+    const USER_TYPE_SUPER_ADMIN = 1;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -30,6 +33,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'organization_id_logged', 'organization_id', 'language', 'islocked'
     ];
 
     /**
@@ -75,5 +79,26 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function isSuperAdmin()
+    {
+        if (Auth::check() && Auth::user()->permission == User::USER_TYPE_SUPER_ADMIN) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // relations organization
+    public function Employer()
+    {
+        return $this->belongsTo('App\Models\Organization');
+    }
+    public function updateAction()
+    {
+        $user = User::where('id', '=', $this->id)->update([
+            'last_access' => Carbon::now(),
+        ]);
     }
 }

@@ -26,11 +26,11 @@ class StockResource extends Resource
             ->schema([
                 TextInput::make('quantity')->numeric()->required(),
                 Forms\Components\Select::make('product_id')
-                    ->label('Product')
+                    ->label('Produto') // Product
                     ->searchable()
                     ->relationship('product','title'),
                 Forms\Components\Select::make('variant_id')
-                    ->label('Variant')
+                    ->label('Variante') // Variant
                     ->searchable()
                     ->relationship('variant','title'),
                 Forms\Components\Hidden::make('user_id')
