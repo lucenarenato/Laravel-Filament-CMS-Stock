@@ -16,6 +16,7 @@ services:
             timeout: 5s
 
     nginx:
+        container_name: "${APP_NAME}_NGINX
         build:
             context: "./docker/nginx"
         depends_on:
@@ -33,6 +34,7 @@ services:
                 ipv4_address: 172.22.0.3
 
     php-fpm:
+        container_name: "${APP_NAME}_PHPFPM"
         build:
             context: "./docker/php-fpm"
         volumes:
@@ -44,6 +46,7 @@ services:
             - "9000"
 
     laravel-horizon:
+        container_name: "${APP_NAME}_LARAHORIZON"
         build:
             context: ./docker/laravel-horizon
         volumes:
@@ -58,6 +61,7 @@ services:
                 ipv4_address: 172.22.0.5
 
     mysql:
+        container_name: "${APP_NAME}_MYSQL"
         image: mysql:8.0.30-debian
         command:
             --default-authentication-plugin=mysql_native_password
@@ -86,6 +90,7 @@ services:
             timeout: 5s
 
     phpmyadmin:
+        container_name: "${APP_NAME}_PHPMYADMIN"
         image: phpmyadmin/phpmyadmin
         ports:
             - 8082:80
