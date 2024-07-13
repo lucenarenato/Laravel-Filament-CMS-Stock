@@ -10,3 +10,7 @@ To install Filament, run the following command:
 ### Stability
 
 Fila CMS is currently in development and is not ready for production use.
+
+## Commands
+php artisan storage:link
+php artisan optimize:clear
