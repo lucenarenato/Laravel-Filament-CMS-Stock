@@ -18,6 +18,11 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
+    public static function getModelLabel(): string
+    {
+        return __('Ordem');
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-clipboard';
 
     protected static ?string $recordTitleAttribute = 'order_id';

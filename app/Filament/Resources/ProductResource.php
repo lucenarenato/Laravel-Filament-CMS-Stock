@@ -26,6 +26,11 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
+    public static function getModelLabel(): string
+    {
+        return __('Produto');
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
     protected static ?string $recordTitleAttribute = 'title';

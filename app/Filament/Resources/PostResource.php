@@ -23,6 +23,11 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
+    public static function getModelLabel(): string
+    {
+        return __('Publicar');
+    }
+
     protected static ?string $navigationIcon = 'heroicon-m-pencil';
 
     protected static ?string $recordTitleAttribute = 'title';
